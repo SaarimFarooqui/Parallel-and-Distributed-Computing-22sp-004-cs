@@ -1,1 +1,7 @@
 Explanation of concepts:
+
+What is a process?
+Process is an instance of a program in execution. Each process has its own allocated memory for data, code and resource. Each process has a stack that stores temporary variables created by functions.
+
+What is a thread?
+Thread is the smallest unit of execution with in a process. It is a sequence of instructions that can be scheduled by Operating System for execution. Threads inside process share the same memory and resources which enables efficient communication and data sharing.
