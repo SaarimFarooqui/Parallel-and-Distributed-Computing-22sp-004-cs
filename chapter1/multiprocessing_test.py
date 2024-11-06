@@ -29,7 +29,7 @@ if __name__ == "__main__":
     start_time = time.time()
     for k in range (threads):
         out_list = list()
-        thread = threading.Thread(target = do_something, args=(size, out_last))
+        thread = threading.Thread(target = do_something, args=(size, out_list))
         jobs.append(thread)
     
     for l in jobs:
