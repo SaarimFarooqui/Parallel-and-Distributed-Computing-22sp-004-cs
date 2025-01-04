@@ -19,7 +19,7 @@ async def fibonacci(number):
 async def binomial_coefficient(n, k):
     result = 1
     for i in range(1, k + 1):
-        result = result * (n - i + 1) / i
+        result = result * (n - i + 1) / iclera
         print(f'Asyncio.Task: Compute binomial_coefficient({i})')
         await asyncio.sleep(1)
     print(f'Asyncio.Task: binomial_coefficient({n}, {k}) = {result}')
