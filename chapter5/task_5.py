@@ -1,35 +1,39 @@
 import asyncio
-@asyncio.coroutine
-def factorial (number):
-    fact = 1
-    for i in range (2, number + 1):
-        print('Asyncio.Task: Compute factorial(%s)' % i)
-        yield from asyncio.sleep(1)
-        fact *= i
-    print('Asyncio. Task factorial (%s) = %s' % (number, fact))
 
-@asyncio.coroutine
-def fibonacci(number):
+async def factorial(number):
+    fact = 1
+    for i in range(2, number + 1):
+        print(f'Asyncio.Task: Compute factorial({i})')
+        await asyncio.sleep(1)
+        fact *= i
+    print(f'Asyncio.Task: factorial({number}) = {fact}')
+
+async def fibonacci(number):
     a, b = 0, 1
     for i in range(number):
-        print('Asyncio.Task: Compute fibonacci(%s)' % i)
-        yield from asyncio.sleep(1)
+        print(f'Asyncio.Task: Compute fibonacci({i})')
+        await asyncio.sleep(1)
         a, b = b, a + b
-    print('Asyncio.Task- fibonacci(%s) = %s' % (number, a))
+    print(f'Asyncio.Task: fibonacci({number}) = {a}')
 
-@asyncio.coroutine
-def binomial_coefficient(n, k):
+async def binomial_coefficient(n, k):
     result = 1
     for i in range(1, k + 1):
-        result = result*(n - i + 1)/i
-        print('Asyncio. Task: Compute binomial_coefficient (%s)' % i)
-        yield from asyncio.sleep(1)
-    print('Asyncio. Task - binomial_coefficient (%s, %s) = %s' % (n, k, result))
+        result = result * (n - i + 1) / i
+        print(f'Asyncio.Task: Compute binomial_coefficient({i})')
+        await asyncio.sleep(1)
+    print(f'Asyncio.Task: binomial_coefficient({n}, {k}) = {result}')
+
+async def main():
+    # Create tasks
+    task_list = [
+        asyncio.create_task(factorial(10)),
+        asyncio.create_task(fibonacci(10)),
+        asyncio.create_task(binomial_coefficient(20, 10))
+    ]
+    # Wait for all tasks to complete
+    await asyncio.gather(*task_list)
 
 if __name__ == '__main__':
-    task_list = [asyncio.Task(factorial (10)),
-        asyncio.Task(fibonacci(10)),
-        asyncio.Task(binomial_coefficient(20, 10))]
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(asyncio.wait(task_list))
-    loop.close()
+    # Run the main function
+    asyncio.run(main())
